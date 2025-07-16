@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0">
+        <title>Register - Create Account</title>
+        <style>
+            *{
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+                font-family: "poppins",sans-serif;
+            }
+
+            body{
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                min-height: 100vh;
+                background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+                position: relative;
+                overflow-x: hidden;
+                padding-top: 80px;
+                padding-bottom: 20px;
+            }
+
+            body::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background-image: 
+                    radial-gradient(circle at 20% 80%, rgba(120, 200, 255, 0.1) 0%, transparent 50%),
+                    radial-gradient(circle at 80% 20%, rgba(120, 200, 255, 0.15) 0%, transparent 50%),
+                    radial-gradient(circle at 40% 40%, rgba(120, 200, 255, 0.1) 0%, transparent 50%);
+                z-index: 1;
+            }
+
+            body::after {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: 
+                    linear-gradient(30deg, transparent 40%, rgba(59, 130, 246, 0.05) 50%, transparent 60%),
+                    linear-gradient(150deg, transparent 40%, rgba(59, 130, 246, 0.05) 50%, transparent 60%),
+                    linear-gradient(240deg, transparent 40%, rgba(59, 130, 246, 0.05) 50%, transparent 60%);
+                z-index: 2;
+            }
+
+            .wrapper{
+                width: 420px;
+                background: rgba(255, 255, 255, 0.1);
+                color: #1e40af;
+                border-radius: 20px;
+                padding: 10px 20px;
+                border: 2px solid rgba(59, 130, 246, 0.2);
+                backdrop-filter: blur(25px);
+                box-shadow: 0 8px 32px rgba(59, 130, 246, 0.1);
+                position: relative;
+                z-index: 3;
+            }
+
+            .wrapper h1{
+                font-size: 36px;
+                text-align: center;
+                background: linear-gradient(135deg, #1e40af, #3b82f6);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
+                margin-bottom: 10px;
+            }
+
+            .wrapper .input-box{
+                position: relative;
+                width: 100%;
+                height:50px;
+                margin:30px 0;
+            }
+
+            .input-box input {
+                width: 100%;
+                height: 100%;
+                background: rgba(255, 255, 255, 0.1);
+                border: none;
+                outline:none;
+                border: 2px solid rgba(59, 130, 246, 0.2);
+                border-radius:40px;
+                color: #1e40af;
+                padding: 20px 45px 20px 20px;
+                font-weight: 500;
+                font-family: "poppins", sans-serif;
+            }
+
+            .input-box input::placeholder{
+                color: rgba(30, 64, 175, 0.7);
+            }
+
+            .input-box input:focus {
+                border-color: #3b82f6;
+                box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+            }
+
+            .input-box input.invalid {
+                border-color: #ef4444;
+                box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+            }
+
+            .input-box input.valid {
+                border-color: #10b981;
+                box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+            }
+
+            .input-box i{
+                position: absolute;
+                right: 20px;
+                top: 50%;
+                transform:translate(-50%);
+                font-size: 20px;
+                color: #3b82f6;
+            }
+
+            .wrapper .terms{
+                display: flex;
+                justify-content: space-around;
+                font-size: 14.5px;
+                margin: -15px 0 15px;
+            }
+
+            .terms label input{
+                accent-color: #3b82f6;
+                margin-right:3px;
+            }
+
+            .terms a{
+                color: #3b82f6;
+                text-decoration: none;
+            }
+
+            .terms a:hover{
+                text-decoration: underline;
+                color: #1e40af;
+            }
+
+            .wrapper .btn{
+                width: 100%;
+                height: 45px;
+                background: linear-gradient(135deg, #3b82f6, #1e40af);
+                border: none;
+                outline: none;
+                border-radius: 40px;
+                box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+                cursor: pointer;
+                font-size: 16px;
+                color: white;
+                font-weight: 600;
+                transition: all 0.3s ease;
+            }
+
+            .wrapper .btn:hover{
+                background: linear-gradient(135deg, #1e40af, #1e3a8a);
+                transform: translateY(-2px);
+                box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
+            }
+
+            .wrapper .btn:disabled{
+                background: #9ca3af;
+                cursor: not-allowed;
+                transform: none;
+                box-shadow: none;
+            }
+
+            .wrapper .register-link{
+                font-size: 14.5px;
+                text-align: center;
+                margin: 15px 10px 15px;
+            }
+
+            .register-link p a{
+                color: #3b82f6;
+                text-decoration: none;
+                font-weight: 600;
+            }
+
+            .register-link p a:hover{
+                text-decoration: underline;
+                color: #1e40af;
+            }
+
+            .password-requirements {
+                font-size: 12px;
+                color: rgba(30, 64, 175, 0.7);
+                margin-top: -15px;
+                margin-bottom: 15px;
+                padding-left: 20px;
+            }
+
+            .password-requirements ul {
+                list-style: none;
+                padding: 0;
+            }
+
+            .password-requirements li {
+                margin: 2px 0;
+                transition: color 0.3s ease;
+            }
+
+            .password-requirements li:before {
+                content: "•";
+                margin-right: 5px;
+            }
+
+            .password-requirements li.valid {
+                color: #10b981;
+            }
+
+            .password-requirements li.invalid {
+                color: #ef4444;
+            }
+
+            .error-message {
+                color: #ef4444;
+                font-size: 12px;
+                margin-top: -10px;
+                margin-bottom: 10px;
+                padding-left: 20px;
+                opacity: 0;
+                transition: opacity 0.3s ease;
+            }
+
+            .error-message.show {
+                opacity: 1;
+            }
+
+            /*         Navbar Styles       */
+            nav {
+                position: fixed;
+                top: 0;
+                width: 100%;
+                background: linear-gradient(to right, #D2C1B6, #456882);
+                display: flex;
+                justify-content: center;
+                gap: 60px;
+                padding: 1rem 2rem;
+                z-index: 1000;
+                align-items: center;
+            }
+
+            nav a {
+                text-decoration: none;
+                color: #fff;
+                font-weight: bold;
+                font-size: 1rem;
+                transition: transform 0.3s ease;
+                display: flex;
+                align-items: center;
+                gap: 0.3rem;
+            }
+
+            nav a:hover {
+                transform: translateY(-4px);
+            }
+
+            .profile-icon {
+                font-size: 1.2rem;
+            }
+
+            /* Footer Styles */
+            footer {
+                background: linear-gradient(to right, #D2C1B6, #456882);
+                color: white;
+                padding: 30px 0;
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                width: 100%;
+                margin-top: 40px;
+            }
+
+            .footer-container {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-between;
+                align-items: center;
+                max-width: 1200px;
+                margin: 0 auto;
+                padding: 0 20px;
+                gap: 20px;
+            }
+
+            .footer-left {
+                flex: 1;
+                min-width: 250px;
+            }
+
+            .site-name {
+                font-size: 2rem;
+                font-weight: 700;
+                font-family: 'Georgia', serif;
+                margin-bottom: 10px;
+                text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+            }
+
+            .footer-center {
+                flex: 1;
+                display: flex;
+                justify-content: center;
+                min-width: 150px;
+            }
+
+            .about-btn {
+                background-color: rgba(255, 255, 255, 0.2);
+                color: white;
+                border: 1px solid white;
+                padding: 10px 25px;
+                border-radius: 25px;
+                font-size: 1rem;
+                cursor: pointer;
+                transition: all 0.3s ease;
+            }
+
+            .about-btn:hover {
+                background-color: rgba(255, 255, 255, 0.3);
+                transform: translateY(-2px);
+            }
+
+            .footer-right {
+                flex: 1;
+                min-width: 250px;
+            }
+
+            .contact-info {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .contact-item {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                font-size: 0.9rem;
+            }
+
+            .contact-icon {
+                font-size: 1.1rem;
+                width: 20px;
+                text-align: center;
+            }
+
+            @media (max-width: 768px) {
+                .footer-container {
+                    flex-direction: column;
+                    text-align: center;
+                    gap: 30px;
+                }
+
+                .footer-center {
+                    order: 3;
+                    width: 100%;
+                }
+
+                .contact-info {
+                    align-items: center;
+                }
+
+                .contact-item {
+                    justify-content: center;
+                }
+
+                nav {
+                    gap: 20px;
+                    padding: 0.8rem 1rem;
+                    flex-wrap: wrap;
+                }
+            }
+        </style>
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    </head>
+
+    <body>
+        <!-- Navbar -->
+        <nav>
+            <a href="index.html#home">Home</a>
+            <a href="index.html#browse">My Projects</a>
+            <a href="index.html#contact">Contact</a>
+            <a href="index.html#profile"><i class="ph-user-circle profile-icon"></i>My Profile</a>
+        </nav>
+
+        <div class="wrapper">
+            <form id="registerForm">
+                <h1>Create Account</h1>
+
+                <div class="input-box">
+                    <input type="text" placeholder="Full Name" required>
+                    <i class="fa-solid fa-user"></i>
+                </div>
+
+                <div class="input-box">
+                    <input type="email" placeholder="Email Address" required>
+                    <i class="fa-solid fa-envelope"></i>
+                </div>    
+
+                <div class="input-box">
+                    <input type="text" placeholder="Student ID" required>
+                    <i class="fa-solid fa-id-card"></i>
+                </div>
+
+                <div class="input-box">
+                    <input type="text" placeholder="Academic Year (e.g., 2024/2025)" required>
+                    <i class="fa-solid fa-calendar-days"></i>
+                </div>
+
+                <div class="input-box">
+                    <input type="text" placeholder="Faculty Name" required>
+                    <i class="fa-solid fa-building-columns"></i>
+                </div>
+
+                <div class="input-box">
+                    <input type="password" placeholder="Password" required id="password">
+                    <i class="fa-solid fa-lock"></i>
+                </div>
+
+                <div class="password-requirements">
+                    <ul>
+                        <li id="length-req">At least 8 characters long</li>
+                        <li id="case-req">Contains uppercase and lowercase letters</li>
+                        <li id="number-req">Contains at least one number</li>
+                    </ul>
+                </div>
+
+                <div class="input-box">
+                    <input type="password" placeholder="Confirm Password" required id="confirmPassword">
+                    <i class="fa-solid fa-lock"></i>
+                </div>
+
+                <div class="error-message" id="passwordError"></div>
+
+                <div class="terms">
+                    <label>
+                        <input type="checkbox" required>
+                        I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>
+                    </label>
+                </div>  
+                  
+                <br><button class="btn" type="submit" id="submitBtn">Create Account</button>
+
+                <div class="register-link">
+                   <p>Already have an account? <a href="index.html">Login here</a></p>
+                </div> 
+
+            </form>
+        </div>
+
+        <!-- Footer -->
+        <footer>
+            <div class="footer-container">
+                <div class="footer-left">
+                    <div class="site-name">Scholar Connect</div>
+                    <p>Your gateway to academic excellence.</p>
+                </div>
+                <div class="footer-center">
+                    <button class="about-btn" onclick="location.href='index.html#about'">About Us</button>
+                </div>
+                <div class="footer-right">
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <span class="contact-icon ph-envelope"></span>
+                            scholarconnect@example.com
+                        </div>
+                        <div class="contact-item">
+                            <span class="contact-icon ph-phone"></span>
+                            +1 (234) 567-8901
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        <script>
+            const passwordInput = document.getElementById('password');
+            const confirmPasswordInput = document.getElementById('confirmPassword');
+            const submitBtn = document.getElementById('submitBtn');
+            const passwordError = document.getElementById('passwordError');
+            
+            // Password requirement elements
+            const lengthReq = document.getElementById('length-req');
+            const caseReq = document.getElementById('case-req');
+            const numberReq = document.getElementById('number-req');
+
+            // Password validation function
+            function validatePassword(password) {
+                const hasLength = password.length >= 8;
+                const hasUpperCase = /[A-Z]/.test(password);
+                const hasLowerCase = /[a-z]/.test(password);
+                const hasNumber = /\d/.test(password);
+                
+                return {
+                    hasLength,
+                    hasUpperCase,
+                    hasLowerCase,
+                    hasNumber,
+                    isValid: hasLength && hasUpperCase && hasLowerCase && hasNumber
+                };
+            }
+
+            // Update password requirements visual feedback
+            function updatePasswordRequirements(validation) {
+                // Length requirement
+                if (validation.hasLength) {
+                    lengthReq.classList.add('valid');
+                    lengthReq.classList.remove('invalid');
+                } else {
+                    lengthReq.classList.add('invalid');
+                    lengthReq.classList.remove('valid');
+                }
+
+                // Case requirement
+                if (validation.hasUpperCase && validation.hasLowerCase) {
+                    caseReq.classList.add('valid');
+                    caseReq.classList.remove('invalid');
+                } else {
+                    caseReq.classList.add('invalid');
+                    caseReq.classList.remove('valid');
+                }
+
+                // Number requirement
+                if (validation.hasNumber) {
+                    numberReq.classList.add('valid');
+                    numberReq.classList.remove('invalid');
+                } else {
+                    numberReq.classList.add('invalid');
+                    numberReq.classList.remove('valid');
+                }
+            }
+
+            // Check if form is valid
+            function checkFormValidity() {
+                const password = passwordInput.value;
+                const confirmPassword = confirmPasswordInput.value;
+                const validation = validatePassword(password);
+                
+                const isPasswordValid = validation.isValid;
+                const doPasswordsMatch = password === confirmPassword && password !== '';
+                
+                // Update submit button state
+                if (isPasswordValid && doPasswordsMatch) {
+                    submitBtn.disabled = false;
+                    passwordError.classList.remove('show');
+                } else {
+                    submitBtn.disabled = true;
+                    
+                    // Show specific error messages
+                    if (password && !validation.isValid) {
+                        let errorMsg = 'Password must meet all requirements';
+                        passwordError.textContent = errorMsg;
+                        passwordError.classList.add('show');
+                    } else if (confirmPassword && !doPasswordsMatch) {
+                        passwordError.textContent = 'Passwords do not match';
+                        passwordError.classList.add('show');
+                    } else {
+                        passwordError.classList.remove('show');
+                    }
+                }
+            }
+
+            // Real-time password validation
+            passwordInput.addEventListener('input', function() {
+                const password = this.value;
+                const validation = validatePassword(password);
+                
+                // Update visual feedback
+                updatePasswordRequirements(validation);
+                
+                // Update input border color
+                if (password === '') {
+                    this.classList.remove('valid', 'invalid');
+                } else if (validation.isValid) {
+                    this.classList.add('valid');
+                    this.classList.remove('invalid');
+                } else {
+                    this.classList.add('invalid');
+                    this.classList.remove('valid');
+                }
+                
+                checkFormValidity();
+            });
+
+            // Real-time confirm password validation
+            confirmPasswordInput.addEventListener('input', function() {
+                const password = passwordInput.value;
+                const confirmPassword = this.value;
+                
+                if (confirmPassword === '') {
+                    this.classList.remove('valid', 'invalid');
+                } else if (password === confirmPassword) {
+                    this.classList.add('valid');
+                    this.classList.remove('invalid');
+                } else {
+                    this.classList.add('invalid');
+                    this.classList.remove('valid');
+                }
+                
+                checkFormValidity();
+            });
+
+            // Form submission
+            document.getElementById('registerForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const password = passwordInput.value;
+                const confirmPassword = confirmPasswordInput.value;
+                const validation = validatePassword(password);
+                
+                // Final validation check
+                if (!validation.isValid) {
+                    passwordError.textContent = 'Password must meet all requirements';
+                    passwordError.classList.add('show');
+                    return;
+                }
+                
+                if (password !== confirmPassword) {
+                    passwordError.textContent = 'Passwords do not match';
+                    passwordError.classList.add('show');
+                    return;
+                }
+                
+                // If all validations pass
+                alert('Account created successfully!');
+                // window.location.href = 'index.html'; // Redirect to login page
+            });
+
+            // Initial form validity check
+            checkFormValidity();
+        </script>
+    </body>
+</html>

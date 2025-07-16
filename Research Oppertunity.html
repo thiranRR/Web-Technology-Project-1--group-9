@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/phosphor-icons/2.0.2/phosphor.min.css">
+    <title>Research Opportunities</title>
+    <style>
+        :root {
+            --accent: #6dd5ed;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+            padding-top: 80px; /* Account for fixed navbar */
+        }
+
+        /*         Navbar Styles       */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: linear-gradient(to right, #D2C1B6, #456882);
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+            padding: 1rem 2rem;
+            z-index: 1000;
+            align-items: center;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #fff;
+            font-weight: bold;
+            font-size: 1rem;
+            transition: transform 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        nav a:hover {
+            transform: translateY(-4px);
+        }
+
+        .profile-icon {
+            font-size: 1.2rem;
+        }
+
+        /* Footer Styles */
+        footer {
+            background: linear-gradient(to right, #D2C1B6, #456882);
+            color: white;
+            padding: 30px 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            width: 100%;
+        }
+
+        .footer-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            gap: 20px;
+        }
+
+        .footer-left {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .site-name {
+            font-size: 2rem;
+            font-weight: 700;
+            font-family: 'Georgia', serif;
+            margin-bottom: 10px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+        }
+
+        .footer-center {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            min-width: 150px;
+        }
+
+        .about-btn {
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 1px solid white;
+            padding: 10px 25px;
+            border-radius: 25px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .about-btn:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .footer-right {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.9rem;
+        }
+
+        .contact-icon {
+            font-size: 1.1rem;
+            width: 20px;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+
+        .title {
+            font-size: 48px;
+            font-weight: 700;
+            color: #1a1a1a;
+        }
+
+        .expand-btn {
+            width: 48px;
+            height: 48px;
+            border: 2px solid #ddd;
+            border-radius: 50%;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .expand-btn:hover {
+            border-color: #007bff;
+            background-color: #f8f9fa;
+        }
+
+        .expand-btn::after {
+            content: '↗';
+            font-size: 20px;
+            color: #666;
+        }
+
+        .search-container {
+            position: relative;
+            margin-bottom: 40px;
+        }
+
+        .search-box {
+            width: 100%;
+            padding: 16px 20px 16px 50px;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            font-size: 16px;
+            background: white;
+            transition: border-color 0.3s ease;
+        }
+
+        .search-box:focus {
+            outline: none;
+            border-color: #007bff;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #999;
+            font-size: 18px;
+        }
+
+        .search-icon::before {
+            content: '🔍';
+        }
+
+        .opportunities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 24px;
+            margin-top: 40px;
+        }
+
+        .opportunity-card {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        .opportunity-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+        }
+
+        .card-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 12px;
+        }
+
+        .card-description {
+            color: #666;
+            font-size: 16px;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+
+        .card-tags {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .tag.ai { background-color: #fce4ec; color: #c2185b; }
+        .tag.biology { background-color: #e8f5e8; color: #2e7d32; }
+        .tag.robotics { background-color: #e3f2fd; color: #1976d2; }
+        .tag.machine-learning { background-color: #fff3e0; color: #f57c00; }
+        .tag.genome { background-color: #f3e5f5; color: #7b1fa2; }
+
+        .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .supervisor {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .supervisor-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background-color: #e0e0e0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+        }
+
+        .supervisor-name {
+            font-weight: 500;
+            color: #333;
+        }
+
+        .date {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .no-results {
+            text-align: center;
+            color: #666;
+            font-size: 18px;
+            margin-top: 60px;
+        }
+
+        @media (max-width: 768px) {
+            .footer-container {
+                flex-direction: column;
+                text-align: center;
+                gap: 30px;
+            }
+
+            .footer-center {
+                order: 3;
+                width: 100%;
+            }
+
+            .contact-info {
+                align-items: center;
+            }
+
+            .contact-item {
+                justify-content: center;
+            }
+
+            nav {
+                gap: 20px;
+                padding: 0.8rem 1rem;
+            }
+
+            nav a {
+                font-size: 0.9rem;
+            }
+            
+            .title {
+                font-size: 32px;
+            }
+            
+            .opportunities-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .container {
+                padding: 20px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav>
+        <a href="index.html#home">Home</a>
+        <a href="index.html#browse">My Projects</a>
+        <a href="index.html#contact">Contact</a>
+        <a href="index.html#profile"><i class="ph-user-circle profile-icon"></i>My Profile</a>
+    </nav>
+
+    <div class="container">
+        <div class="header">
+            <h1 class="title">Research Opportunities</h1>
+            <button class="expand-btn" aria-label="Expand"></button>
+        </div>
+
+        <div class="search-container">
+            <div class="search-icon"></div>
+            <input type="text" class="search-box" placeholder="Search" id="searchInput">
+        </div>
+
+        <div class="opportunities-grid" id="opportunitiesGrid">
+            <!-- Research opportunities will be populated here -->
+        </div>
+
+        <div class="no-results" id="noResults" style="display: none;">
+            No research opportunities found matching your search.
+        </div>
+    </div>
+
+    <!-- footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-left">
+                <div class="site-name">Scholar Connect</div>
+                <p>Your gateway to academic excellence.</p>
+            </div>
+            <div class="footer-center">
+                <button class="about-btn" onclick="location.href='index.html#about'">About Us</button>
+            </div>
+            <div class="footer-right">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <span class="contact-icon ph-envelope"></span>
+                        scholarconnect@example.com
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-icon ph-phone"></span>
+                        +1 (234) 567-8901
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const opportunities = [
+            {
+                title: "AI for Healthcare",
+                description: "Develop artificial intelligence solutions for medical diagnosis",
+                tags: ["ai", "biology"],
+                supervisor: "Dr. Smith",
+                date: "May 20",
+                avatar: "👨‍⚕️"
+            },
+            {
+                title: "Stem Cell Research",
+                description: "Study the properties of stem cells and their potential applications in regenerative medicine",
+                tags: ["biology", "robotics"],
+                supervisor: "Prof. Johnson",
+                date: "May 25",
+                avatar: "👩‍🔬"
+            },
+            {
+                title: "Machine Learning Methods",
+                description: "Explore advanced techniques for machine learning algorithms",
+                tags: ["machine-learning"],
+                supervisor: "Dr. Brown",
+                date: "Apr 30",
+                avatar: "👨‍💻"
+            },
+            {
+                title: "Genome Editing",
+                description: "Investigate CRISPR and other genome editing technologies",
+                tags: ["genome"],
+                supervisor: "Dr. Taylor",
+                date: "May 18",
+                avatar: "🧬"
+            },
+            {
+                title: "Genome Editing",
+                description: "Investigate CRISPR and other genome editing technologies",
+                tags: ["genome"],
+                supervisor: "Dr. Taylor",
+                date: "May 18",
+                avatar: "🧬"
+            },
+            {
+                title: "Human-Robot Interaction",
+                description: "Analyze interactions between humans and robotic systems",
+                tags: ["robotics", "ai"],
+                supervisor: "Dr. Wilson",
+                date: "Jun 02",
+                avatar: "🤖"
+            }
+        ];
+
+        function createOpportunityCard(opportunity) {
+            const card = document.createElement('div');
+            card.className = 'opportunity-card';
+            
+            const tagsHTML = opportunity.tags.map(tag => 
+                `<span class="tag ${tag}">${tag.charAt(0).toUpperCase() + tag.slice(1).replace('-', ' ')}</span>`
+            ).join('');
+            
+            card.innerHTML = `
+                <h3 class="card-title">${opportunity.title}</h3>
+                <p class="card-description">${opportunity.description}</p>
+                <div class="card-tags">${tagsHTML}</div>
+                <div class="card-footer">
+                    <div class="supervisor">
+                        <div class="supervisor-avatar">${opportunity.avatar}</div>
+                        <span class="supervisor-name">${opportunity.supervisor}</span>
+                    </div>
+                    <span class="date">${opportunity.date}</span>
+                </div>
+            `;
+            
+            return card;
+        }
+
+        function renderOpportunities(filteredOpportunities = opportunities) {
+            const grid = document.getElementById('opportunitiesGrid');
+            const noResults = document.getElementById('noResults');
+            
+            grid.innerHTML = '';
+            
+            if (filteredOpportunities.length === 0) {
+                noResults.style.display = 'block';
+                return;
+            }
+            
+            noResults.style.display = 'none';
+            
+            filteredOpportunities.forEach(opportunity => {
+                const card = createOpportunityCard(opportunity);
+                grid.appendChild(card);
+            });
+        }
+
+        function searchOpportunities(searchTerm) {
+            const filtered = opportunities.filter(opportunity => 
+                opportunity.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                opportunity.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                opportunity.supervisor.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                opportunity.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase()))
+            );
+            
+            renderOpportunities(filtered);
+        }
+
+        // Initialize the page
+        renderOpportunities();
+
+        // Search functionality
+        document.getElementById('searchInput').addEventListener('input', (e) => {
+            const searchTerm = e.target.value.trim();
+            if (searchTerm === '') {
+                renderOpportunities();
+            } else {
+                searchOpportunities(searchTerm);
+            }
+        });
+
+        // Card click animations
+        document.addEventListener('click', (e) => {
+            if (e.target.closest('.opportunity-card')) {
+                const card = e.target.closest('.opportunity-card');
+                card.style.transform = 'scale(0.98)';
+                setTimeout(() => {
+                    card.style.transform = 'translateY(-2px)';
+                }, 100);
+            }
+        });
+    </script>
+</body>
+</html>
