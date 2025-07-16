@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI for Healthcare</title>
+    <link rel="stylesheet" href="ss.css">
+    
+</head>
+<body>
+    <!-- Navbar -->
+<nav>
+  <a href="index.html#home">Home</a>
+  <a href="index.html#browse">My Projects</a>
+  <a href="index.html#contact">Contact</a>
+  <a href="index.html#profile"><i class="ph-user-circle profile-icon"></i>My Profile</a>
+  <form class="nav-search" onsubmit="handleSearch(event)">
+    <input type="text" id="searchInput" placeholder="Search publications..." aria-label="Search publications" />
+    <button type="submit" aria-label="Search">
+      <i class="ph-magnifying-glass"></i>
+    </button>
+  </form>
+</nav>
+
+<br><br>
+    <div class="container">
+        <h1>AI for Healthcare</h1>
+        
+        <div class="project-card">
+            <div class="left-section">
+                <div class="author-info">
+                    <div class="avatar">👨‍⚕️</div>
+                    <div class="author-name">Dr. Smith</div>
+                </div>
+                
+                <div class="section-title">Abstract</div>
+                <div class="abstract-text">
+                    The aim of this research is to develop advanced artificial intelligence methods for merged diagnosis and patient care. We will explore machine learning techniques to analyze medical data, identify patterns, and improve decision-making.
+                </div>
+            </div>
+            
+            <div class="right-section">
+                <div class="info-group">
+                    <div class="info-label">Assrract</div>
+                    <ul class="tags">
+                        <li>Machine learning</li>
+                        <li>Data analysis</li>
+                        <li>Medical imaging</li>
+                    </ul>
+                </div>
+                
+                <div style="display: flex; gap: 40px;">
+                    <div class="info-group">
+                        <div class="info-label">Department</div>
+                        <div class="info-value">Computer Science</div>
+                    </div>
+                    
+                    <div class="info-group">
+                        <div class="info-label">Deadline</div>
+                        <div class="info-value">May 20</div>
+                    </div>
+                </div>
+                
+                <button class="apply-btn">Apply Now</button>
+            </div>
+        </div>
+    
+    </div>
+
+    <!-- footer -->
+<footer>
+  <div class="footer-container">
+    <div class="footer-left">
+      <div class="site-name">Scholar Connect</div>
+      <p>Your gateway to academic excellence.</p>
+    </div>
+    <div class="footer-center">
+      <button class="about-btn" onclick="location.href='index.html#about'">About Us</button>
+    </div>
+    <div class="footer-right">
+      <div class="contact-info">
+        <div class="contact-item">
+          <span class="contact-icon ph-envelope"></span>
+          scholarconnect@example.com
+        </div>
+        <div class="contact-item">
+          <span class="contact-icon ph-phone"></span>
+          +1 (234) 567-8901
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- -------------------------Scripts------------------------------------------------- -->
+
+<script>
+    // Sample research publications data (replace with real data or API)
+    const publications = [
+      { title: "Deep Learning for Natural Language Processing" },
+      { title: "Quantum Computing Advances" },
+      { title: "Renewable Energy Technologies" },
+      { title: "AI in Healthcare" },
+      { title: "Data Privacy and Security" },
+      { title: "Machine Learning in Education" }
+    ];
+
+    function handleSearch(event) {
+      event.preventDefault();
+      const query = document.getElementById('searchInput').value.trim().toLowerCase();
+      if (!query) {
+        alert("Please enter keywords to search.");
+        return;
+      }
+      const results = publications.filter(pub => pub.title.toLowerCase().includes(query));
+      if (results.length > 0) {
+        alert("Search Results:\n" + results.map(r => r.title).join("\n"));
+      } else {
+        alert("No publications found matching your keywords.");
+      }
+    }
+</script>
+
+</body>
+</html>
