@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login Page</title>
+  <link rel="stylesheet" href="login1.css">
+</head>
+<body>
+  <div class="container">
+    <div class="tabs">
+      <button id="studentBtn" onclick="showForm('student')">Login as a Student</button>
+      <button id="lecturerBtn" onclick="showForm('lecturer')">Login as a Lecturer</button>
+    </div>
+
+    <form id="studentForm" class="login-form">
+      <h2>Student Login</h2>
+      <input type="text" placeholder="Matric No or Email" required>
+      <input type="password" placeholder="Password" required>
+      <button type="submit">Login</button>
+    </form>
+
+    <form id="lecturerForm" class="login-form hidden">
+      <h2>Lecturer Login</h2>
+      <input type="text" placeholder="Lecturer ID or Email" required>
+      <input type="password" placeholder="Password" required>
+      <button type="submit">Login</button>
+    </form>
+
+    <p class="link">Don't have an account? <a href="createaccount.html">Create one</a></p>
+  </div>
+
+  <script>
+    function showForm(role) {
+      document.getElementById('studentForm').classList.add('hidden');
+      document.getElementById('lecturerForm').classList.add('hidden');
+
+      if (role === 'student') {
+        document.getElementById('studentForm').classList.remove('hidden');
+      } else {
+        document.getElementById('lecturerForm').classList.remove('hidden');
+      }
+    }
+  </script>
+</body>
+</html>
