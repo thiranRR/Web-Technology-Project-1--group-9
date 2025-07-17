@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>lecture profile</title>
+  <link href="https://unpkg.com/phosphor-icons/css/phosphor.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Open Sans', sans-serif;
+      background-color: #cce6ff;
+    }
+
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: linear-gradient(to right, #D2C1B6, #456882);
+      display: flex;
+      justify-content: center;
+      gap: 60px;
+      padding: 1rem 2rem;
+      z-index: 1000;
+      align-items: center;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #fff;
+      font-weight: bold;
+      font-size: 1rem;
+      transition: transform 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    nav a:hover {
+      transform: translateY(-4px);
+    }
+
+    .nav-search {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .nav-search input[type="text"] {
+      padding: 0.3rem 0.6rem;
+      border-radius: 20px;
+      border: none;
+      font-size: 1rem;
+      outline: none;
+      width: 180px;
+    }
+
+    .nav-search input[type="text"]:focus {
+      box-shadow: 0 0 8px #5bd5db;
+    }
+
+    .nav-search button {
+      background: #5bd5db;
+      border: none;
+      border-radius: 50%;
+      padding: 0.4rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .fullbox {
+      display: flex;
+      flex-direction: row;
+      gap: 20px;
+      padding-top: 60px; /* Adjusted for fixed nav */
+      min-height: 100vh;
+      position: relative;
+    }
+
+    .sidebar {
+      /* Removed margin-top */
+      width: 300px;
+      background-color: #f0f8ff;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      border-radius: 0% 8% 8% 0%;
+    }
+
+    .profile-box {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 10px;
+      margin-top: 10px;
+    }
+
+    .profile-pic {
+      width: 100px;
+      height: 100px;
+      background-color: #e0e0e0;
+      border-radius: 50%;
+        margin-bottom: 10px;
+    }
+
+    .profile-name h1 {
+      font-size: 30px;
+      margin-bottom: 10px;
+      color: black;
+    }
+
+    .profile-name p {
+      color: #333;
+      font-size: 25px;
+      margin-bottom: 10px;
+    }
+
+    .da-btn, .co-btn {
+      background-color: #2b78e4;
+      color: black;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+      margin-top: 10px;
+      font-size: 15px;
+    }
+
+    .da-btn:hover, .co-btn:hover,.tabs ul li a:hover {
+      background-color: #1f5a8c;
+    }
+
+    .tabs ul {
+      list-style: none;
+      padding: 0;
+      margin-top: 30px;
+      width: 100%;
+    }
+
+    .tabs ul li {
+      margin: 15px 0;
+    }
+
+    .tabs ul li a {
+      text-decoration: none;
+      color: black;
+      font-weight: bold;
+      display: block;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+      margin-top: 10px;
+      font-size: 20px;
+      text-align: left;
+    }
+
+    .information {
+      flex: 1;
+      padding: 40px;
+    }
+
+    .serchbar {
+      margin-bottom: 30px;
+      display: flex;
+      justify-content: center;
+      
+    }
+    .serchbar input[type="text"] {
+      padding: 0.3rem 0.6rem;
+      border-radius: 20px;
+      border: none;
+      font-size: 1rem;
+      outline: none;
+      width: 600px;
+      height: 40px;
+      
+    }
+    .twobox {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+        justify-content: center;
+      gap: 50px;
+      
+    }
+    .twobox a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .rebox, .newbox {
+      padding: 20px;
+      border-radius: 10px;
+      width: 300px;
+      height: 400px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      box-shadow:#1f5a8c 0px 9px 8px 0px;
+    }
+
+    .rebox {
+      background-color: #edeffa;
+      
+    }
+
+    .newbox {
+      background-color: #fdf1e5;
+      
+    }
+
+    .rebox h2, .newbox h2 {
+      font-size: 20px;
+      margin-top: 20px;
+      color: #2b78e4;
+    }
+
+    .rebox p, .newbox p {
+      margin-top: 10px;
+      color: #555;
+    
+    }
+
+    footer {
+      background: linear-gradient(to right, #D2C1B6, #456882);
+      color: white;
+      padding: 30px 0;
+      width: 100%;
+    }
+
+    .footer-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+      gap: 20px;
+    }
+
+    .footer-left {
+      flex: 1;
+      min-width: 250px;
+    }
+
+    .site-name {
+      font-size: 2rem;
+      font-weight: 700;
+      font-family: 'Georgia', serif;
+      margin-bottom: 10px;
+    }
+
+    .footer-center {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      min-width: 150px;
+    }
+
+    .about-btn {
+      background-color: rgba(255, 255, 255, 0.2);
+      color: white;
+      border: 1px solid white;
+      padding: 10px 25px;
+      border-radius: 25px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .about-btn:hover {
+      background-color: rgba(255, 255, 255, 0.3);
+      transform: translateY(-2px);
+    }
+
+    .footer-right {
+      flex: 1;
+      min-width: 250px;
+    }
+
+    .contact-info {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.9rem;
+    }
+
+    .contact-icon {
+      font-size: 1.1rem;
+      width: 20px;
+      text-align: center;
+    }
+
+    @media (max-width: 768px) {
+      .fullbox,
+      .footer-container {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .sidebar {
+        width: 100%;
+        border-radius: 0;
+        /* margin-top removed */
+        margin-top: 20px;
+      }
+
+      .twobox {
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Top Navigation -->
+<nav>
+  <a href="#">Home</a>
+  <a href="#">My Projects</a>
+  <a href="#">Contact</a>
+  <a href="#"><i class="ph-user-circle profile-icon"></i>My Profile</a>
+  <form class="nav-search" onsubmit="handleSearch(event)">
+    <input type="text" id="searchInput" placeholder="Search publications..." />
+    <button type="submit"><i class="ph-magnifying-glass"></i></button>
+  </form>
+</nav>
+
+<!-- Main Layout -->
+<div class="fullbox">
+  <div class="sidebar">
+    <div class="profile-box">
+      <div class="profile-pic"></div>
+      <div class="profile-name">
+        <h1>Cynthia Brown</h1>
+        <p>College Lecturer</p>
+        <button class="da-btn">Dashboard</button><br>
+        <button class="co-btn">Courses</button>
+      </div>
+    </div>
+    <div class="tabs">
+      <ul>
+        <li><a href="#" target="_blank"> <i class="fas fa-note-sticky"></i> Dashboard </a></li>
+        <li><a href="#" target="_blank"><i class="fas fa-clipboard"></i> Course</a></li>
+        <li><a href="#" target="_blank"><i class="fas fa-book"></i> Students</a></li>
+        <li><a href="#" target="_blank"><i class="fas fa-graduation-cap"></i> Paid Course</a></li>
+        <li><a href="#" target="_blank"><i class="fas fa-calendar-alt"></i> Attendance </a></li>
+        <li><a href="#" target="_blank"><i class="fas fa-list"></i> Grading</a></li>
+        <li><a href="#" target="_blank"><i class="fas fa-headphones"></i> Alumni</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="information">
+    <div class="serchbar">
+      <form class="nav-search" onsubmit="handleSearch(event)">
+        <input type="text" id="searchInput" placeholder=" Search ..." />
+        <button type="submit"><i class="ph-magnifying-glass"></i></button>
+      </form>
+    </div>
+    <div class="twobox">
+      <a href="#" class="rebox" target="_blank">
+        
+          <img src="pic/S1.png" alt="Review Icon">
+          <h2>Review Research Document</h2>
+          <p>Review submitted research papers</p>
+      </a>
+      <a href="#" class="newbox" target="_blank">  
+        
+          <img src="pic/S2.png" alt="New Research Icon">
+          <h2>New Research Opportunity</h2>
+          <p>Post new research topics available to students</p>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-container">
+    <div class="footer-left">
+      <div class="site-name">Scholar Connect</div>
+      <p>Your gateway to academic excellence.</p>
+    </div>
+    <div class="footer-center">
+      <button class="about-btn">About Us</button>
+    </div>
+    <div class="footer-right">
+      <div class="contact-info">
+        <div class="contact-item"><span class="contact-icon ph-envelope"></span>scholarconnect@example.com</div>
+        <div class="contact-item"><span class="contact-icon ph-phone"></span>+1 (234) 567-8901</div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  function handleSearch(event) {
+    event.preventDefault();
+    const query = document.getElementById('searchInput').value.trim().toLowerCase();
+    const publications = [
+      { title: "Deep Learning for NLP" },
+      { title: "Quantum Computing Advances" },
+      { title: "AI in Healthcare" },
+      { title: "Data Privacy & Security" }
+    ];
+    const results = publications.filter(pub => pub.title.toLowerCase().includes(query));
+    alert(results.length ? "Search Results:\n" + results.map(r => r.title).join("\n") : "No publications found.");
+  }
+</script>
+</body>
+</html>
