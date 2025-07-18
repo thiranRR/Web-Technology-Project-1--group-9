@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -6,12 +6,11 @@
     <title>University Lecturer Dashboard</title>
     <script src="https://unpkg.com/phosphor-icons"></script>
     <link rel="stylesheet" href="lecdash.css">
-    
-  
 </head>
 <body>
-    
+    <!-- Top Navbar -->
     <nav class="top-nav">
+        <button class="hamburger" onclick="toggleSidebar()">☰</button>
         <a href="index.html#home">Home</a>
         <a href="index.html#browse">My Projects</a>
         <a href="index.html#contact">Contact</a>
@@ -24,14 +23,14 @@
         </form>
     </nav>
 
-   
+    <!-- Sidebar -->
     <nav class="sidebar">
         <div class="sidebar-header">
             <h1>UNIVERSITY<br>LECTURER</h1>
         </div>
         <ul class="nav-menu">
             <li class="nav-item">
-                <a href="#" class="nav-link active">
+                <a href="dashboard.php" class="nav-link">
                     <svg class="nav-icon" viewBox="0 0 24 24">
                         <path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/>
                     </svg>
@@ -39,7 +38,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="students.php" class="nav-link">
                     <svg class="nav-icon" viewBox="0 0 24 24">
                         <path d="M16 4c0-1.11.89-2 2-2s2 .89 2 2-.89 2-2 2-2-.89-2-2zm4 18v-6h2.5l-2.54-7.63A1.5 1.5 0 0 0 18.54 8H16c-.8 0-1.54.37-2.01 1.01L12 13l-2-4H7c-.8 0-1.54.37-2.01 1.01L2.46 17.37A1.5 1.5 0 0 0 3.88 19H6c.8 0 1.54-.37 2.01-1.01L10 14l2 4h2.54c.8 0 1.54-.37 2.01-1.01L20 22z"/>
                     </svg>
@@ -47,7 +46,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="papers.php" class="nav-link">
                     <svg class="nav-icon" viewBox="0 0 24 24">
                         <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm4 18H6V4h7v5h5v11z"/>
                     </svg>
@@ -55,7 +54,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="courses.php" class="nav-link">
                     <svg class="nav-icon" viewBox="0 0 24 24">
                         <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/>
                     </svg>
@@ -63,7 +62,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="schedule.php" class="nav-link">
                     <svg class="nav-icon" viewBox="0 0 24 24">
                         <path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/>
                     </svg>
@@ -71,7 +70,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="logout.php" class="nav-link">
                     <svg class="nav-icon" viewBox="0 0 24 24">
                         <path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/>
                     </svg>
@@ -121,7 +120,7 @@
                             <div class="paper-title">Quantum Computing Overview</div>
                             <div class="paper-size">1.1 MB</div>
                         </div>
-                        <button class="download-btn">⬇</button>
+                        <a href="papers/quantum_computing.pdf" class="download-btn" download>⬇</a>
                     </div>
                 </div>
 
@@ -157,7 +156,7 @@
                         <span class="upcoming-nav">›</span>
                     </div>
                     <div class="calendar-header">
-                        <span id="monthYear">April 2024</span>
+                        <span id="monthYear"></span>
                         <div class="calendar-nav">
                             <button id="prevMonth">‹</button>
                             <button id="nextMonth">›</button>
@@ -176,8 +175,7 @@
             </div>
         </div>
     </main>
-
-    <!-- Footer -->
+ 
     <footer>
         <div class="footer-container">
             <div class="footer-left">
@@ -203,7 +201,7 @@
     </footer>
 
     <script>
-        // Sample research publications data (replace with real data or API)
+        
         const publications = [
             { title: "Deep Learning for Natural Language Processing" },
             { title: "Quantum Computing Advances" },
@@ -228,11 +226,31 @@
             }
         }
 
+        // Toggle sidebar on mobile
+        function toggleSidebar() {
+            const sidebar = document.querySelector('.sidebar');
+            sidebar.classList.toggle('active');
+        }
+
+        // Highlight active sidebar link based on URL
+        function setActiveLink() {
+            const currentPage = window.location.pathname.split('/').pop() || 'dashboard.php';
+            const links = document.querySelectorAll('.nav-link');
+            links.forEach(link => {
+                const href = link.getAttribute('href');
+                if (href === currentPage) {
+                    link.classList.add('active');
+                } else {
+                    link.classList.remove('active');
+                }
+            });
+        }
+
         class Calendar {
             constructor() {
-                this.currentDate = new Date();
-                this.selectedDate = new Date(2024, 3, 16); // April 16, 2024
-                this.today = new Date();
+                this.currentDate = new Date(2025, 6, 19); // July 19, 2025
+                this.selectedDate = new Date(2025, 6, 19);
+                this.today = new Date(2025, 6, 19);
                 this.monthNames = [
                     'January', 'February', 'March', 'April', 'May', 'June',
                     'July', 'August', 'September', 'October', 'November', 'December'
@@ -241,7 +259,6 @@
             }
 
             init() {
-                this.currentDate = new Date(2024, 3, 1); // Start with April 2024
                 this.render();
                 this.bindEvents();
             }
@@ -282,7 +299,6 @@
                 let startingDayOfWeek = firstDay.getDay();
                 if (startingDayOfWeek === 0) startingDayOfWeek = 7;
                 startingDayOfWeek = startingDayOfWeek - 1;
-                if (startingDayOfWeek < 0) startingDayOfWeek = 6;
 
                 for (let i = 0; i < startingDayOfWeek; i++) {
                     const emptyDay = document.createElement('div');
@@ -336,7 +352,10 @@
 
         document.addEventListener('DOMContentLoaded', () => {
             new Calendar();
+            setActiveLink();
         });
+
+         
     </script>
 </body>
 </html>
