@@ -270,6 +270,18 @@
             font-weight: 500;
             text-transform: uppercase;
         }
+        .download-btn {
+             background: none;
+             border: none;
+             color:  darkblue;
+             cursor: pointer;
+             font-size: 28px; /* Increased from 0.85rem to 28px */
+             padding: 5px;
+             margin-left: 8px;
+             text-decoration: none;
+             transition: color 0.3s ease;
+        }
+
 
         .status-approved {
             background-color: #d4edda;
@@ -285,18 +297,47 @@
             background-color: #f8d7da;
             color: #721c24;
         }
-
-        .download-btn {
-            background: none;
-            border: none;
-            color: var(--accent);
-            cursor: pointer;
-            font-size: 0.85rem;
-            padding: 5px;
-            margin-left: 8px;
-            text-decoration: none;
-            transition: color 0.3s ease;
+    .paper-item {
+        display: flex;
+        align-items: center;
+        padding: 10px;
+        border: 1px solid #e0e0e0;
+        border-radius: 5px;
+        margin-bottom: 8px;
+        background: #fafafa;
+        justify-content: space-between; /* This will push elements to sides */
+    }
+    .paper-icon {
+            width: 34px;
+            height: 34px;
+            background-color: #e74c3c;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            color: white;
+            font-size: 9px;
+            font-weight: 600;
         }
+    
+    .paper-main-content {
+        display: flex;
+        align-items: center;
+        flex-grow: 1;
+    }
+    
+    .paper-actions {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+    
+    .download-emoji {
+        font-size: 28px; /* Large size as requested */
+        text-decoration: none;
+        color: #456882;
+    }
 
         .download-btn:hover {
             color: #5bd5db;
