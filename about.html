@@ -83,19 +83,14 @@
             { title: "Machine Learning in Education" }
         ];
 
-        function handleSearch(event) {
+       function handleSearch(event) {
             event.preventDefault();
-            const query = document.getElementById('searchInput').value.trim().toLowerCase();
+            const query = document.getElementById('searchInput').value.trim();
             if (!query) {
-                alert("Please enter keywords to search.");
-                return;
+               alert("Please enter keywords to search.");
+               return;
             }
-            const results = publications.filter(pub => pub.title.toLowerCase().includes(query));
-            if (results.length > 0) {
-                alert("Search Results:\n" + results.map(r => r.title).join("\n"));
-            } else {
-                alert("No publications found matching your keywords.");
-            }
+            window.location.href = research-opportunity.html?query=${encodeURIComponent(query)};
         }
     </script>
 </body>
