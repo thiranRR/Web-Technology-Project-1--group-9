@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Upload Research</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: hsl(0, 11%, 89%);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .uploadbox {
+            width: 350px;
+            margin: 0 auto;
+            padding: 30px;
+            border: 1px solid #ccc;
+            border-radius: 20px;
+            background-color: #f9f9f9;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .twosection {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+        }
+        .twosection > div {
+            flex: 1;
+        }
+        button {
+            background-color: #2b78e4;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            width: 100%;
+            font-weight: bold;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #1a5cb0;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        select, input[type="text"], input[type="date"], textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 2px solid #ccc;
+            border-radius: 10px;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+        select:focus, input:focus, textarea:focus {
+            outline: none;
+            border-color: #2b78e4;
+        }
+        .error {
+            color: red;
+            font-size: 12px;
+            margin-top: -10px;
+            margin-bottom: 10px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <form class="uploadbox" id="researchForm">
+        <label for="researchTitle">Research Title:</label>
+        <input type="text" id="researchTitle" name="researchTitle" required>
+        <div id="titleError" class="error">Please enter a research title</div>
+        
+        <label for="professor">Professor in Charge</label>
+        <select id="professor" name="professor" required>
+            <option value="" disabled selected>Select Professor...</option>
+            <option value="prof1">Professor 1</option>
+            <option value="prof2">Professor 2</option>
+            <option value="prof3">Professor 3</option>
+        </select>
+        <div id="professorError" class="error">Please select a professor</div>
+        
+        <label for="abstract">Abstract</label>
+        <textarea id="abstract" name="abstract" required></textarea>
+        <div id="abstractError" class="error">Please enter an abstract</div>
+        
+        <label for="content">Content</label>
+        <input type="text" id="content" name="content" required>
+        <div id="contentError" class="error">Please enter content</div>
+        
+        <div class="twosection">
+            <div class="department">
+                <label for="department">Department</label>
+                <select id="department" name="department" required>
+                    <option value="" disabled selected>Select Department...</option>
+                    <option value="cse">Computer Science</option>
+                    <option value="ece">Electronics</option>
+                    <option value="mech">Mechanical</option>
+                    <option value="civil">Civil</option>
+                    <option value="bio">Biotechnology</option>
+                </select>
+                <div id="departmentError" class="error">Please select a department</div>
+            </div>
+            
+            <div class="deadline">
+                <label for="deadline">Deadline</label>
+                <input type="date" id="deadline" name="deadline" required>
+                <div id="deadlineError" class="error">Please select a deadline</div>
+            </div>
+        </div>
+        
+        <button type="submit">Post</button>
+    </form>
+
+    <script>
+        document.getElementById('researchForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const errorElements = document.querySelectorAll('.error');
+            errorElements.forEach(el => el.style.display = 'none');
+            
+            let isValid = true;
+
+            if (!document.getElementById('researchTitle').value.trim()) {
+                document.getElementById('titleError').style.display = 'block';
+                isValid = false;
+            }
+            
+            if (!document.getElementById('professor').value) {
+                document.getElementById('professorError').style.display = 'block';
+                isValid = false;
+            }
+            
+            if (!document.getElementById('abstract').value.trim()) {
+                document.getElementById('abstractError').style.display = 'block';
+                isValid = false;
+            }
+            
+            if (!document.getElementById('content').value.trim()) {
+                document.getElementById('contentError').style.display = 'block';
+                isValid = false;
+            }
+            
+            if (!document.getElementById('department').value) {
+                document.getElementById('departmentError').style.display = 'block';
+                isValid = false;
+            }
+            
+            if (!document.getElementById('deadline').value) {
+                document.getElementById('deadlineError').style.display = 'block';
+                isValid = false;
+            }
+            
+            if (isValid) {
+                alert('Research submitted successfully!');
+                this.reset();
+            }
+        });
+        document.getElementById('deadline').min = new Date().toISOString().split('T')[0];
+    </script>
+</body>
+</html>
