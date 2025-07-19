@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login Page</title>
+  <link rel="stylesheet" href="login1.css">
+  <style>
+    .hidden { display: none; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="tabs">
+      <button id="studentBtn" onclick="showForm('student')">Login as a Student</button>
+      <button id="lecturerBtn" onclick="showForm('lecturer')">Login as a Lecturer</button>
+    </div>
+
+    <!-- Student Login Form -->
+    <form id="studentForm" class="login-form" method="POST">
+      <h2>Student Login</h2>
+      <input type="hidden" name="role" value="student">
+      <input type="text" name="username" placeholder="Matric No or Email" required>
+      <input type="password" name="password" placeholder="Password" required>
+      <button type="submit">Login</button>
+    </form>
+
+    <!-- Lecturer Login Form -->
+    <form id="lecturerForm" class="login-form hidden" method="POST">
+      <h2>Lecturer Login</h2>
+      <input type="hidden" name="role" value="lecturer">
+      <input type="text" name="username" placeholder="Lecturer ID or Email" required>
+      <input type="password" name="password" placeholder="Password" required>
+      <button type="submit">Login</button>
+    </form>
+
+    <!-- Message Area -->
+    <p id="loginMessage" style="color:red; font-weight:bold;"></p>
+
+    <!-- Create Account Link -->
+    <p class="link">Don't have an account? <a href="createaccount.html">Create one</a></p>
+  </div>
+
+  <!-- JS Section -->
+  <script>
+    // Switch between student and lecturer forms
+    function showForm(role) {
+      document.getElementById('studentForm').classList.add('hidden');
+      document.getElementById('lecturerForm').classList.add('hidden');
+
+      if (role === 'student') {
+        document.getElementById('studentForm').classList.remove('hidden');
+      } else {
+        document.getElementById('lecturerForm').classList.remove('hidden');
+      }
+
+      // Clear any old message
+      document.getElementById('loginMessage').textContent = '';
+    }
+
+    // Wait until HTML is fully loaded before running JS
+    document.addEventListener('DOMContentLoaded', function () {
+      const studentForm = document.getElementById('studentForm');
+      const lecturerForm = document.getElementById('lecturerForm');
+      const message = document.getElementById('loginMessage');
+
+      studentForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+        loginUser('student');
+      });
+
+      lecturerForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+        loginUser('lecturer');
+      });
+
+      function loginUser(role) {
+        const form = role === 'student' ? studentForm : lecturerForm;
+        const username = form.querySelector('input[name="username"]').value;
+        const password = form.querySelector('input[name="password"]').value;
+
+        fetch('login.php', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: `role=${role}&username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`
+        })
+          .then(res => res.json())
+          .then(data => {
+            if (data.success) {
+              message.style.color = 'green';
+              message.textContent = data.message;
+              // Optional: Redirect to dashboard
+              // window.location.href = "dashboard.html";
+            }else {
+              message.style.color = 'red';
+              message.textContent = data.message;
+            }
+          })
+          .catch(err => {
+            message.style.color = 'red';
+            message.textContent = 'Error connecting to server.';
+          });
+      }
+    });
+  </script>
+</body>
+</html>
