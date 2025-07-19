@@ -7,7 +7,6 @@
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
             background-color: #f5f5f5;
-            padding: 40px 20px;
             line-height: 1.5;
         }
 
@@ -248,7 +247,6 @@
             }
         }
 
-        /*         Navbar Styles (Add from here)       */
 nav {
   position: fixed;
   top: 0;
@@ -318,7 +316,6 @@ nav a:hover {
   background: #5bd5db;
 }
 
-/* Footer Styles */
 footer {
   background: linear-gradient(to right, #D2C1B6, #456882);
   color: white;
