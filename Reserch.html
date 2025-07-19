@@ -3,18 +3,206 @@
 <head>
     <title>Upload Research</title>
     <style>
+    
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: linear-gradient(to right, #D2C1B6, #456882);
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+            padding: 1rem 2rem;
+            z-index: 1000;
+            align-items: center;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #fff;
+            font-weight: bold;
+            font-size: 1rem;
+            transition: transform 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        nav a:hover {
+            transform: translateY(-4px);
+        }
+
+        .profile-icon {
+            font-size: 1.2rem;
+        }
+
+        .nav-search {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-search input[type="text"] {
+            padding: 0.3rem 0.6rem;
+            border-radius: 20px;
+            border: none;
+            font-size: 1rem;
+            outline: none;
+            transition: box-shadow 0.3s ease;
+            width: 180px;
+            max-width: 100%;
+        }
+
+        .nav-search input[type="text"]:focus {
+            box-shadow: 0 0 8px var(--accent);
+        }
+
+        .nav-search button {
+            background: var(--accent);
+            border: none;
+            border-radius: 50%;
+            padding: 0.3rem 0.4rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s ease;
+        }
+
+        .nav-search button:hover {
+            background: #5bd5db;
+        }
+
+        footer {
+            background: linear-gradient(to right, #D2C1B6, #456882);
+            color: white;
+            padding: 30px 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            width: 100%;
+        }
+
+        .footer-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            gap: 20px;
+        }
+
+        .footer-left {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .site-name {
+            font-size: 2rem;
+            font-weight: 700;
+            font-family: 'Georgia', serif;
+            margin-bottom: 10px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+        }
+
+        .footer-center {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            min-width: 150px;
+        }
+
+        .about-btn {
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 1px solid white;
+            padding: 10px 25px;
+            border-radius: 25px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .about-btn:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .footer-right {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.9rem;
+        }
+
+        .contact-icon {
+            font-size: 1.1rem;
+            width: 20px;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .footer-container {
+                flex-direction: column;
+                text-align: center;
+                gap: 30px;
+            }
+
+            .footer-center {
+                order: 3;
+                width: 100%;
+            }
+
+            .contact-info {
+                align-items: center;
+            }
+
+            .contact-item {
+                justify-content: center;
+            }
+        }
+
+       
         body {
             font-family: Arial, sans-serif;
             background-color: hsl(0, 11%, 89%);
             margin: 0;
-            padding: 20px;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        main {
+            flex: 1;
+            padding: 100px 20px 80px;
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
+            width: 100%;
         }
+
+        .upbox {
+            width: 100%;
+            max-width: 1200px;
+            display: flex;
+            justify-content: center;
+        }
+
         .uploadbox {
-            width: 350px;
+            width: 100%;
+            max-width: 500px;
             margin: 0 auto;
             padding: 30px;
             border: 1px solid #ccc;
@@ -22,15 +210,19 @@
             background-color: #f9f9f9;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
+
         .twosection {
             display: flex;
             justify-content: space-between;
             gap: 15px;
         }
+
         .twosection > div {
             flex: 1;
         }
-        button {
+
+        
+        #researchForm button[type="submit"] {
             background-color: #2b78e4;
             color: white;
             padding: 12px 20px;
@@ -42,14 +234,17 @@
             font-size: 16px;
             transition: background-color 0.3s;
         }
-        button:hover {
+
+        #researchForm button[type="submit"]:hover {
             background-color: #1a5cb0;
         }
+
         label {
             display: block;
             margin-bottom: 5px;
             font-weight: bold;
         }
+
         select, input[type="text"], input[type="date"], textarea {
             width: 100%;
             padding: 10px;
@@ -59,14 +254,17 @@
             box-sizing: border-box;
             font-family: Arial, sans-serif;
         }
+
         textarea {
             resize: vertical;
             min-height: 100px;
         }
+
         select:focus, input:focus, textarea:focus {
             outline: none;
             border-color: #2b78e4;
         }
+
         .error {
             color: red;
             font-size: 12px;
@@ -74,56 +272,136 @@
             margin-bottom: 10px;
             display: none;
         }
+
+        @media (max-width: 768px) {
+            main {
+                padding: 100px 15px 80px;
+            }
+            
+            .twosection {
+                flex-direction: column;
+                gap: 0;
+            }
+            
+            .uploadbox {
+                padding: 20px;
+            }
+        }
     </style>
 </head>
 <body>
-    <form class="uploadbox" id="researchForm">
-        <label for="researchTitle">Research Title:</label>
-        <input type="text" id="researchTitle" name="researchTitle" required>
-        <div id="titleError" class="error">Please enter a research title</div>
-        
-        <label for="professor">Professor in Charge</label>
-        <select id="professor" name="professor" required>
-            <option value="" disabled selected>Select Professor...</option>
-            <option value="prof1">Professor 1</option>
-            <option value="prof2">Professor 2</option>
-            <option value="prof3">Professor 3</option>
-        </select>
-        <div id="professorError" class="error">Please select a professor</div>
-        
-        <label for="abstract">Abstract</label>
-        <textarea id="abstract" name="abstract" required></textarea>
-        <div id="abstractError" class="error">Please enter an abstract</div>
-        
-        <label for="content">Content</label>
-        <input type="text" id="content" name="content" required>
-        <div id="contentError" class="error">Please enter content</div>
-        
-        <div class="twosection">
-            <div class="department">
-                <label for="department">Department</label>
-                <select id="department" name="department" required>
-                    <option value="" disabled selected>Select Department...</option>
-                    <option value="cse">Computer Science</option>
-                    <option value="ece">Electronics</option>
-                    <option value="mech">Mechanical</option>
-                    <option value="civil">Civil</option>
-                    <option value="bio">Biotechnology</option>
+    <nav>
+        <a href="index.html#home">Home</a>
+        <a href="index.html#browse">Browse Researches</a>
+        <a href="index.html#contact">Contact</a>
+        <a href="index.html#profile"><i class="ph-user-circle profile-icon"></i>My Profile</a>
+        <form class="nav-search" onsubmit="handleSearch(event)">
+            <input type="text" id="searchInput" placeholder="Search publications..." aria-label="Search publications" />
+            <button type="submit" aria-label="Search">
+                <i class="ph-magnifying-glass"></i>
+            </button>
+        </form>
+    </nav>
+    
+    <main>
+        <div class="upbox">
+            <form class="uploadbox" id="researchForm">
+                <label for="researchTitle">Research Title:</label>
+                <input type="text" id="researchTitle" name="researchTitle" required>
+                <div id="titleError" class="error">Please enter a research title</div>
+                
+                <label for="professor">Professor in Charge</label>
+                <select id="professor" name="professor" required>
+                    <option value="" disabled selected>Select Professor...</option>
+                    <option value="prof1">Professor 1</option>
+                    <option value="prof2">Professor 2</option>
+                    <option value="prof3">Professor 3</option>
                 </select>
-                <div id="departmentError" class="error">Please select a department</div>
+                <div id="professorError" class="error">Please select a professor</div>
+                
+                <label for="abstract">Abstract</label>
+                <textarea id="abstract" name="abstract" required></textarea>
+                <div id="abstractError" class="error">Please enter an abstract</div>
+                
+                <label for="content">Content</label>
+                <input type="text" id="content" name="content" required>
+                <div id="contentError" class="error">Please enter content</div>
+                
+                <div class="twosection">
+                    <div class="department">
+                        <label for="department">Department</label>
+                        <select id="department" name="department" required>
+                            <option value="" disabled selected>Select Department...</option>
+                            <option value="cse">Computer Science</option>
+                            <option value="ece">Electronics</option>
+                            <option value="mech">Mechanical</option>
+                            <option value="civil">Civil</option>
+                            <option value="bio">Biotechnology</option>
+                        </select>
+                        <div id="departmentError" class="error">Please select a department</div>
+                    </div>
+                    
+                    <div class="deadline">
+                        <label for="deadline">Deadline</label>
+                        <input type="date" id="deadline" name="deadline" required>
+                        <div id="deadlineError" class="error">Please select a deadline</div>
+                    </div>
+                </div>
+                
+                <button type="submit">Post</button>
+            </form>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-left">
+                <div class="site-name">Scholar Connect</div>
+                <p>Your gateway to academic excellence.</p>
             </div>
-            
-            <div class="deadline">
-                <label for="deadline">Deadline</label>
-                <input type="date" id="deadline" name="deadline" required>
-                <div id="deadlineError" class="error">Please select a deadline</div>
+            <div class="footer-center">
+                <button class="about-btn" onclick="location.href='index.html#about'">About Us</button>
+            </div>
+            <div class="footer-right">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <span class="contact-icon ph-envelope"></span>
+                        scholarconnect@example.com
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-icon ph-phone"></span>
+                        +1 (234) 567-8901
+                    </div>
+                </div>
             </div>
         </div>
-        
-        <button type="submit">Post</button>
-    </form>
+    </footer>
 
     <script>
+        const publications = [
+            { title: "Deep Learning for Natural Language Processing" },
+            { title: "Quantum Computing Advances" },
+            { title: "Renewable Energy Technologies" },
+            { title: "AI in Healthcare" },
+            { title: "Data Privacy and Security" },
+            { title: "Machine Learning in Education" }
+        ];
+
+        function handleSearch(event) {
+            event.preventDefault();
+            const query = document.getElementById('searchInput').value.trim().toLowerCase();
+            if (!query) {
+                alert("Please enter keywords to search.");
+                return;
+            }
+            const results = publications.filter(pub => pub.title.toLowerCase().includes(query));
+            if (results.length > 0) {
+                alert("Search Results:\n" + results.map(r => r.title).join("\n"));
+            } else {
+                alert("No publications found matching your keywords.");
+            }
+        }
+        
         document.getElementById('researchForm').addEventListener('submit', function(e) {
             e.preventDefault();
             const errorElements = document.querySelectorAll('.error');
@@ -166,6 +444,7 @@
                 this.reset();
             }
         });
+        
         document.getElementById('deadline').min = new Date().toISOString().split('T')[0];
     </script>
 </body>
