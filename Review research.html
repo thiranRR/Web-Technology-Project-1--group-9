@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Submitted Researches</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="Review research.css">
+</head>
+<body>
+
+ <!-- Navbar -->
+<nav>
+  <a href="home.html">Home</a>
+  <a href="index.html#browse">My Projects</a>
+  <a href="index.html#contact">Contact</a>
+  <a href="index.html#profile"><i class="ph-user-circle profile-icon"></i>My Profile</a>
+  <form class="nav-search" onsubmit="handleSearch(event)">
+    <input type="text" id="searchInput" placeholder="Search publications..." aria-label="Search publications" />
+    <button type="submit" aria-label="Search">
+      <i class="ph-magnifying-glass"></i>
+    </button>
+  </form>
+</nav>
+
+<br><br>
+  <!-- Main Content -->
+  <div class="main-container">
+    <div class="research-table-page">
+      <h1>Submitted Researches</h1>
+      <table class="research-table" id="researchTable">
+        <thead>
+          <tr>
+            <th>Student Index</th>
+            <th>Name</th>
+            <th>Research Topic</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><a href="#">20234567</a></td>
+            <td>Emma Johnson</td>
+            <td>Applications of Artificial Intelligence</td>
+          </tr>
+          <tr>
+            <td><a href="#">20234568</a></td>
+            <td>Michael Smith</td>
+            <td>Biodiversity Conservation Strategies</td>
+          </tr>
+          <tr>
+            <td><a href="#">20234569</a></td>
+            <td>Olivia Brown</td>
+            <td>Robotics in Healthcare</td>
+          </tr>
+          <tr>
+            <td><a href="#">20234570</a></td>
+            <td>William Davis</td>
+            <td>Quantum Computing Algorithms</td>
+          </tr>
+          <tr>
+            <td><a href="#">20234571</a></td>
+            <td>Sophia Miller</td>
+            <td>Renewable Energy Solutions</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- footer -->
+<footer>
+  <div class="footer-container">
+    <div class="footer-left">
+      <div class="site-name">Scholar Connect</div>
+      <p>Your gateway to academic excellence.</p>
+    </div>
+    <div class="footer-center">
+      <button class="about-btn" onclick="location.href='about.html'">About Us</button>
+    </div>
+    <div class="footer-right">
+      <div class="contact-info">
+        <div class="contact-item">
+          <span class="contact-icon ph-envelope"></span>
+          scholarconnect@example.com
+        </div>
+        <div class="contact-item">
+          <span class="contact-icon ph-phone"></span>
+          +1 (234) 567-8901
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
