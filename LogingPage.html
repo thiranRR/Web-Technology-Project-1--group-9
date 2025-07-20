@@ -40,6 +40,24 @@
       </form>
       <p class="link">Don't have an account? <a href="createaccount.html">Create one</a></p>
     </div>
+
+
+    <form id="studentForm" class="login-form" onsubmit="return redirectStudent()" >
+      <h2>Student Login</h2>
+      <input type="text" name="username" placeholder="Matric No or Email" required>
+      <input type="password" name="password" placeholder="Password" required>
+      <button type="submit">Login</button>
+    </form>
+
+    <form id="lecturerForm" class="login-form hidden" onsubmit="return redirectLecturer()">
+      <h2>Lecturer Login</h2>
+      <input type="text" name="username" placeholder="Lecturer ID or Email" required>
+      <input type="password" name="password" placeholder="Password" required>
+      <button type="submit">Login</button>
+    </form>
+
+    <p class="link">Don't have an account? <a href="createaccount.html">Create one</a></p>
+>>>>>>> 13990184e93f0e0ea0f19448b30575d6863291e9
   </div>
 
   <footer>
