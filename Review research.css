@@ -224,7 +224,43 @@ nav a:hover {
   text-align: center;
 }
 
+/* Mobile Responsive Styles */
 @media (max-width: 768px) {
+  nav {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .nav-search input[type="text"] {
+    width: 100%;
+  }
+
+  .hero {
+    padding: 4rem 1rem;
+  }
+
+  .hero h2 {
+    font-size: 3.5rem;
+  }
+
+  .discrip {
+    font-size: 1.1rem;
+    text-align: center;
+  }
+
+  .about img {
+    width: 80%;
+  }
+
+  .cta-buttons {
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+
+  .cta-buttons button {
+    width: 100%;
+  }
+
   .footer-container {
     flex-direction: column;
     text-align: center;
