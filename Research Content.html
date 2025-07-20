@@ -94,28 +94,6 @@
   </div>
 </footer>
 
-    <!-- JavaScript Search Logic -->
-    <script>
-        const publications = [
-            { title: "Deep Learning for Natural Language Processing" },
-            { title: "Quantum Computing Advances" },
-            { title: "Renewable Energy Technologies" },
-            { title: "AI in Healthcare" },
-            { title: "Data Privacy and Security" },
-            { title: "Machine Learning in Education" }
-        ];
-
-       function handleSearch(event) {
-            event.preventDefault();
-            const query = document.getElementById('searchInput').value.trim();
-            if (!query) {
-               alert("Please enter keywords to search.");
-               return;
-            }
-            window.location.href = `research-opportunity.html?query=${encodeURIComponent(query)}`;
-        }
-    </script>
-
 <!-- -------------------------Scripts------------------------------------------------- -->
 
 <script>
