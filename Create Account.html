@@ -163,7 +163,7 @@
                 transition: all 0.3s ease;
             }
 
-            .wrapper .btn:hover{
+            .wrapper .btn:hover:not(:disabled){
                 background: linear-gradient(135deg, #1e40af, #1e3a8a);
                 transform: translateY(-2px);
                 box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
@@ -399,32 +399,37 @@
                 <h1>Create Account</h1>
 
                 <div class="input-box">
-                    <input type="text" placeholder="Full Name" required>
+                    <input type="text" name="full_name" placeholder="Full Name" required id="fullName">
                     <i class="fa-solid fa-user"></i>
                 </div>
+                <div class="error-message" id="fullNameError"></div>
 
                 <div class="input-box">
-                    <input type="email" placeholder="Email Address" required>
+                    <input type="email" name="email" placeholder="Email Address" required id="email">
                     <i class="fa-solid fa-envelope"></i>
                 </div>    
+                <div class="error-message" id="emailError"></div>
 
                 <div class="input-box">
-                    <input type="text" placeholder="Student ID" required>
+                    <input type="text" name="student_id" placeholder="Student ID" required id="studentId">
                     <i class="fa-solid fa-id-card"></i>
                 </div>
+                <div class="error-message" id="studentIdError"></div>
 
                 <div class="input-box">
-                    <input type="text" placeholder="Academic Year (e.g., 2024/2025)" required>
+                    <input type="text" name="academic_year" placeholder="Academic Year (e.g., 2024/2025)" required id="academicYear">
                     <i class="fa-solid fa-calendar-days"></i>
                 </div>
+                <div class="error-message" id="academicYearError"></div>
 
                 <div class="input-box">
-                    <input type="text" placeholder="Faculty Name" required>
+                    <input type="text" name="faculty_name" placeholder="Faculty Name" required id="facultyName">
                     <i class="fa-solid fa-building-columns"></i>
                 </div>
+                <div class="error-message" id="facultyNameError"></div>
 
                 <div class="input-box">
-                    <input type="password" placeholder="Password" required id="password">
+                    <input type="password" name="password" placeholder="Password" required id="password">
                     <i class="fa-solid fa-lock"></i>
                 </div>
 
@@ -433,11 +438,12 @@
                         <li id="length-req">At least 8 characters long</li>
                         <li id="case-req">Contains uppercase and lowercase letters</li>
                         <li id="number-req">Contains at least one number</li>
+                        <li id="symbol-req">Contains at least one symbol (!@#$%^&*)</li>
                     </ul>
                 </div>
 
                 <div class="input-box">
-                    <input type="password" placeholder="Confirm Password" required id="confirmPassword">
+                    <input type="password" name="confirm_password" placeholder="Confirm Password" required id="confirmPassword">
                     <i class="fa-solid fa-lock"></i>
                 </div>
 
@@ -445,12 +451,12 @@
 
                 <div class="terms">
                     <label>
-                        <input type="checkbox" required>
+                        <input type="checkbox" name="terms" required id="termsCheckbox">
                         I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>
                     </label>
                 </div>  
                   
-                <br><button class="btn" type="submit" id="submitBtn">Create Account</button>
+                <br><button class="btn" type="submit" id="submitBtn" disabled>Create Account</button>
 
                 <div class="register-link">
                    <p>Already have an account? <a href="index.html">Login here</a></p>
@@ -485,30 +491,99 @@
         </footer>
 
         <script>
+            // Get all form elements
+            const fullNameInput = document.getElementById('fullName');
+            const emailInput = document.getElementById('email');
+            const studentIdInput = document.getElementById('studentId');
+            const academicYearInput = document.getElementById('academicYear');
+            const facultyNameInput = document.getElementById('facultyName');
             const passwordInput = document.getElementById('password');
             const confirmPasswordInput = document.getElementById('confirmPassword');
+            const termsCheckbox = document.getElementById('termsCheckbox');
             const submitBtn = document.getElementById('submitBtn');
+            
+            // Get error message elements
+            const fullNameError = document.getElementById('fullNameError');
+            const emailError = document.getElementById('emailError');
+            const studentIdError = document.getElementById('studentIdError');
+            const academicYearError = document.getElementById('academicYearError');
+            const facultyNameError = document.getElementById('facultyNameError');
             const passwordError = document.getElementById('passwordError');
             
             // Password requirement elements
             const lengthReq = document.getElementById('length-req');
             const caseReq = document.getElementById('case-req');
             const numberReq = document.getElementById('number-req');
+            const symbolReq = document.getElementById('symbol-req');
 
-            // Password validation function
+            // Validation functions
+            function validateFullName(name) {
+                const nameRegex = /^[a-zA-Z\s]+$/;
+                return nameRegex.test(name.trim()) && name.trim().length >= 2;
+            }
+
+            function validateEmail(email) {
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return emailRegex.test(email);
+            }
+
+            function validateStudentId(id) {
+                const idRegex = /^[A-Za-z0-9]{6,12}$/;
+                return idRegex.test(id);
+            }
+
+            function validateAcademicYear(year) {
+                const yearRegex = /^\d{4}\/\d{4}$/;
+                if (!yearRegex.test(year)) return false;
+                
+                const [startYear, endYear] = year.split('/').map(Number);
+                return startYear <= endYear && startYear >= 2000 && endYear <= 2050;
+            }
+
+            function validateFacultyName(faculty) {
+                const facultyRegex = /^[a-zA-Z\s]+$/;
+                return facultyRegex.test(faculty.trim()) && faculty.trim().length >= 2;
+            }
+
             function validatePassword(password) {
                 const hasLength = password.length >= 8;
                 const hasUpperCase = /[A-Z]/.test(password);
                 const hasLowerCase = /[a-z]/.test(password);
                 const hasNumber = /\d/.test(password);
+                const hasSymbol = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~`]/.test(password);
                 
                 return {
                     hasLength,
                     hasUpperCase,
                     hasLowerCase,
                     hasNumber,
-                    isValid: hasLength && hasUpperCase && hasLowerCase && hasNumber
+                    hasSymbol,
+                    isValid: hasLength && hasUpperCase && hasLowerCase && hasNumber && hasSymbol
                 };
+            }
+
+            // Show error function
+            function showError(errorElement, message) {
+                errorElement.textContent = message;
+                errorElement.classList.add('show');
+            }
+
+            // Hide error function
+            function hideError(errorElement) {
+                errorElement.classList.remove('show');
+            }
+
+            // Update input validation state
+            function updateInputState(input, isValid) {
+                if (input.value === '') {
+                    input.classList.remove('valid', 'invalid');
+                } else if (isValid) {
+                    input.classList.add('valid');
+                    input.classList.remove('invalid');
+                } else {
+                    input.classList.add('invalid');
+                    input.classList.remove('valid');
+                }
             }
 
             // Update password requirements visual feedback
@@ -539,39 +614,110 @@
                     numberReq.classList.add('invalid');
                     numberReq.classList.remove('valid');
                 }
+
+                // Symbol requirement
+                if (validation.hasSymbol) {
+                    symbolReq.classList.add('valid');
+                    symbolReq.classList.remove('invalid');
+                } else {
+                    symbolReq.classList.add('invalid');
+                    symbolReq.classList.remove('valid');
+                }
             }
 
             // Check if form is valid
             function checkFormValidity() {
+                const fullName = fullNameInput.value;
+                const email = emailInput.value;
+                const studentId = studentIdInput.value;
+                const academicYear = academicYearInput.value;
+                const facultyName = facultyNameInput.value;
                 const password = passwordInput.value;
                 const confirmPassword = confirmPasswordInput.value;
-                const validation = validatePassword(password);
-                
-                const isPasswordValid = validation.isValid;
+                const termsAccepted = termsCheckbox.checked;
+
+                const isFullNameValid = validateFullName(fullName);
+                const isEmailValid = validateEmail(email);
+                const isStudentIdValid = validateStudentId(studentId);
+                const isAcademicYearValid = validateAcademicYear(academicYear);
+                const isFacultyNameValid = validateFacultyName(facultyName);
+                const passwordValidation = validatePassword(password);
+                const isPasswordValid = passwordValidation.isValid;
                 const doPasswordsMatch = password === confirmPassword && password !== '';
-                
-                // Update submit button state
-                if (isPasswordValid && doPasswordsMatch) {
-                    submitBtn.disabled = false;
-                    passwordError.classList.remove('show');
-                } else {
-                    submitBtn.disabled = true;
-                    
-                    // Show specific error messages
-                    if (password && !validation.isValid) {
-                        let errorMsg = 'Password must meet all requirements';
-                        passwordError.textContent = errorMsg;
-                        passwordError.classList.add('show');
-                    } else if (confirmPassword && !doPasswordsMatch) {
-                        passwordError.textContent = 'Passwords do not match';
-                        passwordError.classList.add('show');
-                    } else {
-                        passwordError.classList.remove('show');
-                    }
-                }
+
+                const isFormValid = isFullNameValid && isEmailValid && isStudentIdValid && 
+                                  isAcademicYearValid && isFacultyNameValid && isPasswordValid && 
+                                  doPasswordsMatch && termsAccepted;
+
+                submitBtn.disabled = !isFormValid;
             }
 
-            // Real-time password validation
+            // Event listeners for real-time validation
+            fullNameInput.addEventListener('input', function() {
+                const isValid = validateFullName(this.value);
+                updateInputState(this, isValid);
+                
+                if (this.value && !isValid) {
+                    showError(fullNameError, 'Full name should only contain letters and spaces');
+                } else {
+                    hideError(fullNameError);
+                }
+                
+                checkFormValidity();
+            });
+
+            emailInput.addEventListener('input', function() {
+                const isValid = validateEmail(this.value);
+                updateInputState(this, isValid);
+                
+                if (this.value && !isValid) {
+                    showError(emailError, 'Please enter a valid email address');
+                } else {
+                    hideError(emailError);
+                }
+                
+                checkFormValidity();
+            });
+
+            studentIdInput.addEventListener('input', function() {
+                const isValid = validateStudentId(this.value);
+                updateInputState(this, isValid);
+                
+                if (this.value && !isValid) {
+                    showError(studentIdError, 'Student ID should be 6-12 characters (letters and numbers only)');
+                } else {
+                    hideError(studentIdError);
+                }
+                
+                checkFormValidity();
+            });
+
+            academicYearInput.addEventListener('input', function() {
+                const isValid = validateAcademicYear(this.value);
+                updateInputState(this, isValid);
+                
+                if (this.value && !isValid) {
+                    showError(academicYearError, 'Academic year should be in format YYYY/YYYY (e.g., 2024/2025) with valid years');
+                } else {
+                    hideError(academicYearError);
+                }
+                
+                checkFormValidity();
+            });
+
+            facultyNameInput.addEventListener('input', function() {
+                const isValid = validateFacultyName(this.value);
+                updateInputState(this, isValid);
+                
+                if (this.value && !isValid) {
+                    showError(facultyNameError, 'Faculty name should only contain letters and spaces');
+                } else {
+                    hideError(facultyNameError);
+                }
+                
+                checkFormValidity();
+            });
+
             passwordInput.addEventListener('input', function() {
                 const password = this.value;
                 const validation = validatePassword(password);
@@ -580,34 +726,28 @@
                 updatePasswordRequirements(validation);
                 
                 // Update input border color
-                if (password === '') {
-                    this.classList.remove('valid', 'invalid');
-                } else if (validation.isValid) {
-                    this.classList.add('valid');
-                    this.classList.remove('invalid');
+                updateInputState(this, validation.isValid);
+                
+                checkFormValidity();
+            });
+
+            confirmPasswordInput.addEventListener('input', function() {
+                const password = passwordInput.value;
+                const confirmPassword = this.value;
+                const doMatch = password === confirmPassword;
+                
+                updateInputState(this, doMatch);
+                
+                if (confirmPassword && !doMatch) {
+                    showError(passwordError, 'Passwords do not match');
                 } else {
-                    this.classList.add('invalid');
-                    this.classList.remove('valid');
+                    hideError(passwordError);
                 }
                 
                 checkFormValidity();
             });
 
-            // Real-time confirm password validation
-            confirmPasswordInput.addEventListener('input', function() {
-                const password = passwordInput.value;
-                const confirmPassword = this.value;
-                
-                if (confirmPassword === '') {
-                    this.classList.remove('valid', 'invalid');
-                } else if (password === confirmPassword) {
-                    this.classList.add('valid');
-                    this.classList.remove('invalid');
-                } else {
-                    this.classList.add('invalid');
-                    this.classList.remove('valid');
-                }
-                
+            termsCheckbox.addEventListener('change', function() {
                 checkFormValidity();
             });
 
@@ -621,14 +761,12 @@
                 
                 // Final validation check
                 if (!validation.isValid) {
-                    passwordError.textContent = 'Password must meet all requirements';
-                    passwordError.classList.add('show');
+                    showError(passwordError, 'Password must meet all requirements');
                     return;
                 }
                 
                 if (password !== confirmPassword) {
-                    passwordError.textContent = 'Passwords do not match';
-                    passwordError.classList.add('show');
+                    showError(passwordError, 'Passwords do not match');
                     return;
                 }
                 
