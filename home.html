@@ -8,9 +8,9 @@
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Courier+Prime&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Bradley+Hand&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
   <!-- Styles -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="stylesheet" href="https://unpkg.com/locomotive-scroll/dist/locomotive-scroll.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/phosphor-icons@1.4.2/src/css/phosphor.css">
 </head>
@@ -37,7 +37,6 @@
             </button>
         </form>
     </nav>
-
 
     <!-- Hero -->
     <section id="home" class="hero">
@@ -74,8 +73,8 @@
       <div class="highlight">Ready to start your research journey?</div>
 
       <div class="cta-buttons">
-      <a href="login.html?role=student" class="role-btn">Login as a Student</a> 
-      <a href="login.html?role=lecturer" class="role-btn">Login as a Lecturer</a>
+        <a href="LogingPage.html?role=student"><button class="role-btn">Login as a Student</button></a>
+        <a href="LogingPage.html?role=lecturer"><button class="role-btn">Login as a Lecturer</button></a>
       </div>
     </section>
 
@@ -87,7 +86,7 @@
           <p>Your gateway to academic excellence.</p>
         </div>
         <div class="footer-center">
-          <button class="about-btn" onclick="location.href=about.html">About Us</button>
+          <button class="about-btn" onclick="location.href='about.html'">About Us</button>
         </div>
         <div class="footer-right">
           <div class="contact-info">
@@ -105,29 +104,6 @@
     </footer>
   </div>
 
-  <!-- JavaScript Search Logic -->
-    <script>
-        const publications = [
-            { title: "Deep Learning for Natural Language Processing" },
-            { title: "Quantum Computing Advances" },
-            { title: "Renewable Energy Technologies" },
-            { title: "AI in Healthcare" },
-            { title: "Data Privacy and Security" },
-            { title: "Machine Learning in Education" }
-        ];
-
-       function handleSearch(event) {
-            event.preventDefault();
-            const query = document.getElementById('searchInput').value.trim();
-            if (!query) {
-               alert("Please enter keywords to search.");
-               return;
-            }
-            window.location.href = `research-opportunity.html?query=${encodeURIComponent(query)}`;
-        }
-    </script>
-
-
   <!-- Scripts -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <script src="https://unpkg.com/locomotive-scroll/dist/locomotive-scroll.min.js"></script>
@@ -143,18 +119,13 @@
     ];
 
     function handleSearch(event) {
-      event.preventDefault();
-      const query = document.getElementById('searchInput').value.trim().toLowerCase();
-      if (!query) {
-        alert("Please enter keywords to search.");
-        return;
-      }
-      const results = publications.filter(pub => pub.title.toLowerCase().includes(query));
-      if (results.length > 0) {
-        alert("Search Results:\n" + results.map(r => r.title).join("\n"));
-      } else {
-        alert("No publications found matching your keywords.");
-      }
+            event.preventDefault();
+            const query = document.getElementById('searchInput').value.trim();
+            if (!query) {
+               alert("Please enter keywords to search.");
+               return;
+            }
+            window.location.href = `research-opportunity.html?query=${encodeURIComponent(query)}`;
     }
 
     // Locomotive Scroll
