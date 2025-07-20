@@ -1,0 +1,346 @@
+:root {
+      --light-bg: #F9F3EF;
+      --glow: rgba(255, 255, 255, 0.2);
+      --accent: #8ef0f9;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    /* Full-page background video */
+        .video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            object-fit: cover;
+            opacity: 0.3;
+        }
+        /* Overlay to darken video slightly */
+        .video-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(232, 236, 239, 0.5);
+            z-index: -1;
+        }
+
+
+    body {
+      background: var(--light-bg);
+      font-family: 'Courier New', Courier, monospace;
+      color: #222;
+      overflow-x: hidden;
+      background-color: #F9F3EF;
+    }
+
+    .preloader {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background: #000;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+    }
+
+    .preloader h1 {
+      font-family: 'Copperplate', 'Papyrus', fantasy;
+      font-size: 3rem;
+    }
+
+    .progress-bar {
+      margin-top: 20px;
+      width: 0%;
+      height: 5px;
+      background-color: var(--accent);
+    }
+
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: linear-gradient(to right, #D2C1B6, #456882);
+      display: flex;
+      justify-content: center;
+      gap: 60px;
+      padding: 1rem 2rem;
+      z-index: 1000;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #fff;
+      font-weight: bold;
+      font-size: 1rem;
+      transition: transform 0.3s ease;
+    }
+
+    nav a:hover {
+      transform: translateY(-4px);
+    }
+
+    section {
+      min-height: 100vh;
+      padding: 6rem 2rem;
+    }
+
+    .hero {
+      padding: 15%;
+      position: relative;
+      text-align: center;
+    }
+
+    .hero h1 {
+      float:left;
+      padding-left:5px;  
+      font-size: 2rem;
+      font-weight: normal;
+      margin-bottom: 1rem;
+      background: linear-gradient(to right, #78A083, #35374B);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: inline-block;
+    }
+
+    .hero h2 {
+      padding-top:10px;  
+      font-family: 'Copperplate', 'Papyrus', fantasy;
+      font-size: 6rem;
+      font-weight: bold;
+      background: linear-gradient(to right, #074173, #5DEBD7, black);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: inline-block;
+    }
+
+    .discrip {
+      margin-top: 2rem;
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #333;
+      font-family: 'Courier New', Courier, monospace;
+      background: linear-gradient(to right, #780C28, #CAE0BC);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: inline-block;
+    }
+
+
+    .spline {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+
+    .orbs {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+
+    .about {
+      position: relative;
+    }
+
+    .circle,
+    .border-circle {
+      position: absolute;
+      border-radius: 50%;
+      z-index: -1;
+    }
+
+    .circle {
+      background: radial-gradient(circle, #D2C1B6, #456882);
+      filter: blur(40px);
+    }
+
+    .border-circle {
+      border: 3px solid #D2C1B6;
+      filter: blur(60px);
+    }
+
+    .circle1 { width: 4cm; height: 4cm; top: 20%; left: 10%; }
+    .circle2 { width: 2cm; height: 2cm; top: 50%; right: 15%; }
+    .circle3 { width: 6cm; height: 6cm; bottom: 10%; left: 40%; }
+    .border-circle1 { width: 3cm; height: 3cm; top: 10%; right: 20%; }
+    .border-circle2 { width: 5cm; height: 5cm; bottom: 20%; left: 20%; }
+    .border-circle3 { width: 2.5cm; height: 2.5cm; top: 60%; left: 60%; }
+    .border-circle4 { width: 3.5cm; height: 3.5cm; top: 40%; right: 40%; z-index: 0; }
+    .border-circle5 { width: 4.5cm; height: 4.5cm; bottom: 5%; right: 10%; z-index: 0; }
+
+    .about img {
+      width: 250px;
+      margin: 1rem;
+      border-radius: 1rem;
+    }
+
+    .about p {
+      font-size: 1.1rem;
+      text-align: center;
+      max-width: 800px;
+      margin: 2rem auto;
+    }
+
+    .highlight {
+      font-size: 1.5rem;
+      color: #444;
+      text-align: center;
+      font-weight: bold;
+      font-family: 'Bradley Hand', cursive;
+    }
+
+    .cta-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .cta-buttons button {
+      padding: 1rem 2rem;
+      font-size: 1rem;
+      background: #D2C1B6;
+      color: #000;
+      border: 2px solid #000;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: 'Bradley Hand', cursive;
+    }
+
+    .cta-buttons button:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    }
+    /*sign up as lecture button*/
+    .cta-buttons .lectureSignUpButton{
+      padding: 1rem 2rem;
+      font-size: 1rem;
+      background: #D2C1B6;
+      color: #000;
+      border: 2px solid #000;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: 'Bradley Hand', cursive;
+      opacity: 1 !important;
+    } 
+     
+    /*sign up as lecture button^*/
+    .a{
+      display: flex;
+      align-content: flex-end;
+    }
+     footer {
+            background: linear-gradient(to right, #D2C1B6, #456882);
+            color: white;
+            padding: 30px 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            width: 100%;
+        }
+
+        .footer-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            gap: 20px;
+        }
+
+        .footer-left {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .site-name {
+            font-size: 2rem;
+            font-weight: 700;
+            font-family: 'Georgia', serif;
+            margin-bottom: 10px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+        }
+
+        .footer-center {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            min-width: 150px;
+        }
+
+        .about-btn {
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 1px solid white;
+            padding: 10px 25px;
+            border-radius: 25px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .about-btn:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .footer-right {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.9rem;
+        }
+
+        .contact-icon {
+            font-size: 1.1rem;
+            width: 20px;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .footer-container {
+                flex-direction: column;
+                text-align: center;
+                gap: 30px;
+            }
+
+            .footer-center {
+                order: 3;
+                width: 100%;
+            }
+
+            .contact-info {
+                align-items: center;
+            }
+
+            .contact-item {
+                justify-content: center;
+            }
+        }
