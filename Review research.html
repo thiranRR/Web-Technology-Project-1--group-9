@@ -5,23 +5,27 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Submitted Researches</title>
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+  <script src=https://unpkg.com/phosphor-icons></script>
   <link rel="stylesheet" href="Review research.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
 
  <!-- Navbar -->
-<nav>
-  <a href="home.html">Home</a>
-  <a href="index.html#browse">My Projects</a>
-  <a href="index.html#contact">Contact</a>
-  <a href="index.html#profile"><i class="ph-user-circle profile-icon"></i>My Profile</a>
-  <form class="nav-search" onsubmit="handleSearch(event)">
-    <input type="text" id="searchInput" placeholder="Search publications..." aria-label="Search publications" />
-    <button type="submit" aria-label="Search">
-      <i class="ph-magnifying-glass"></i>
-    </button>
-  </form>
-</nav>
+<!-- Navbar -->
+    <nav>
+        <a href="home.html">Home</a>
+        <a href="my-project.html">My Projects</a>
+        <a href="contact.html">Contact</a>
+        <a href="profile.html"><i class="ph-user-circle profile-icon"></i>My Profile</a>
+        <form class="nav-search" onsubmit="handleSearch(event)">
+            <input type="text" id="searchInput" placeholder="Search publications..." aria-label="Search publications" />
+            <button type="submit" aria-label="Search">
+                <i class="fas fa-search"></i>
+
+            </button>
+        </form>
+    </nav>
 
 <br><br>
   <!-- Main Content -->
@@ -91,5 +95,27 @@
     </div>
   </div>
 </footer>
+  <!-- JavaScript Search Logic -->
+    <script>
+        const publications = [
+            { title: "Deep Learning for Natural Language Processing" },
+            { title: "Quantum Computing Advances" },
+            { title: "Renewable Energy Technologies" },
+            { title: "AI in Healthcare" },
+            { title: "Data Privacy and Security" },
+            { title: "Machine Learning in Education" }
+        ];
+
+       function handleSearch(event) {
+            event.preventDefault();
+            const query = document.getElementById('searchInput').value.trim();
+            if (!query) {
+               alert("Please enter keywords to search.");
+               return;
+            }
+            window.location.href = `research-opportunity.html?query=${encodeURIComponent(query)}`;
+        }
+    </script>
+
 </body>
 </html>
