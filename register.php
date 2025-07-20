@@ -5,7 +5,7 @@ error_reporting(E_ALL);
 // Database credentials
 $host = "localhost";
 $username = "root";
-$password = "mysql123"; // Change if needed
+$password = "mysql123";
 $dbname = "wtdb";
 
 // Connect to MySQL
